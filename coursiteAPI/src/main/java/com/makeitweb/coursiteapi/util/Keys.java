@@ -11,19 +11,19 @@ import java.util.stream.Collectors;
 @Component
 @Service
 public class Keys {
-    @Value("${security.jwt.secret}")
+    @Value("${security.jwt.secret:change-me-in-production}")
     private String secret;
-    @Value("${security.jwt.start}")
+    @Value("${security.jwt.start:Bearer}")
     private String start;
-    @Value("${security.jwt.jwtDuration}")
+    @Value("${security.jwt.jwtDuration:86400000}")
     private int jwtDuration;
-    @Value("${send.grid.api.key}")
+    @Value("${send.grid.api.key:disabled}")
     private String sendgridApiKey;
-    @Value("${send.grid.email}")
+    @Value("${send.grid.email:no-reply@caleiro.online}")
     private String sendgridEmail;
-    @Value("${app.url}")
+    @Value("${app.url:https://caleiro.online}")
     private String appUrl;
-    @Value("${app.cors.allowed-origins}")
+    @Value("${app.cors.allowed-origins:https://caleiro.online,https://www.caleiro.online,http://localhost:3000}")
     private String corsAllowedOrigins;
 
     public String getSecret() {

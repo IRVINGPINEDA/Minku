@@ -8,12 +8,12 @@ services:
     environment:
       MYSQL_DATABASE: coursite
       MYSQL_USER: coursite
-      MYSQL_PASSWORD: ${DB_PASSWORD:-coursite123}
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root123}
+      MYSQL_PASSWORD: coursite123
+      MYSQL_ROOT_PASSWORD: root123
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p$$MYSQL_ROOT_PASSWORD || exit 1"]
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -proot123 || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 12
@@ -27,8 +27,11 @@ services:
     environment:
       SPRING_DATASOURCE_URL: "jdbc:mysql://db:3306/coursite?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC"
       SPRING_DATASOURCE_USERNAME: "coursite"
-      SPRING_DATASOURCE_PASSWORD: "${DB_PASSWORD:-coursite123}"
-      JWT_SECRET: "${JWT_SECRET:-change-me-in-production}"
+      SPRING_DATASOURCE_PASSWORD: "coursite123"
+      JWT_SECRET: "change-me-in-production"
+      SECURITY_JWT_SECRET: "change-me-in-production"
+      SECURITY_JWT_START: "Bearer"
+      SECURITY_JWT_JWTDURATION: "86400000"
       SENDGRID_API_KEY: "${SENDGRID_API_KEY:-disabled}"
       SENDGRID_EMAIL: "${SENDGRID_EMAIL:-no-reply@caleiro.online}"
       APP_URL: "https://caleiro.online"
