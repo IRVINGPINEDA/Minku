@@ -30,8 +30,6 @@ import { AdminCourseReport } from "../components/admin/AdminCourseReport";
 import { AdminCourseReviews } from "../components/admin/AdminCourseReviews";
 import { NewCourse } from "../components/teacher/NewCourse";
 import { EditCourse } from "../components/teacher/EditCourse";
-import { TeacherRegister } from "../components/teacher/TeacherRegister";
-import { TeacherRegisterRoute } from "./TeacherRegisterRoute";
 import { HomeView } from "../components/views/HomeView";
 import { AboutView } from "../components/views/AboutView";
 import { ServicesView } from "../components/views/ServicesView";
@@ -153,12 +151,6 @@ export const AppRouter = () => {
                                 <ProfileView />
                             </Container>
                         </StudentRoute>
-                    }
-                    />
-                    <Route path="/teacher/register/finish" element={
-                        <TeacherRegisterRoute>
-                            <TeacherRegister />
-                        </TeacherRegisterRoute>
                     }
                     />
                     <Route path="/teacher/courses" element={
