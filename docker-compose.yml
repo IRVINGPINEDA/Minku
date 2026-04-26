@@ -34,6 +34,10 @@ services:
       DB_NAME: ${DB_NAME:-coursite}
       DB_USERNAME: ${DB_USERNAME:-coursite}
       DB_PASSWORD: ${DB_PASSWORD:-coursite123}
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/${DB_NAME:-coursite}?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME:-coursite}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-coursite123}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
       JWT_SECRET: ${JWT_SECRET:-change-me}
       JWT_PREFIX: ${JWT_PREFIX:-Bearer}
       JWT_DURATION: ${JWT_DURATION:-86400000}
