@@ -75,12 +75,19 @@ services:
     environment:
       API_UPSTREAM: "http://api:8080"
       SERVER_NAME: "${SERVER_NAME:-caleiro.online}"
+      CERTBOT_EMAIL: "${CERTBOT_EMAIL:-admin@caleiro.online}"
     depends_on:
       api:
         condition: service_healthy
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - certbot-certs:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
     restart: unless-stopped
 
 volumes:
   mysql-data:
+  certbot-certs:
+  certbot-www:

@@ -26,7 +26,6 @@ ENV REACT_APP_FIREBASE_PROJECT_ID=${REACT_APP_FIREBASE_PROJECT_ID}
 ENV REACT_APP_FIREBASE_STORAGE_BUCKET=${REACT_APP_FIREBASE_STORAGE_BUCKET}
 ENV REACT_APP_FIREBASE_MESSAGING_SENDER_ID=${REACT_APP_FIREBASE_MESSAGING_SENDER_ID}
 ENV REACT_APP_FIREBASE_APP_ID=${REACT_APP_FIREBASE_APP_ID}
-# Keep CRA builds stable on small Docker hosts by reducing webpack peak memory use.
 ENV NODE_OPTIONS=--max_old_space_size=${WEB_BUILD_MAX_OLD_SPACE_SIZE}
 ENV GENERATE_SOURCEMAP=${WEB_BUILD_GENERATE_SOURCEMAP}
 
@@ -34,12 +33,22 @@ RUN npm run build
 
 FROM nginx:1.27-alpine
 
+RUN apk add --no-cache certbot openssl dcron
+
 ENV API_UPSTREAM=http://api:8080
 ENV SERVER_NAME=caleiro.online
+ENV CERTBOT_EMAIL=admin@caleiro.online
 
 COPY docker/nginx/default.conf.template /etc/nginx/templates/default.conf.template
+COPY docker/nginx/http-only.conf /etc/nginx/http-only.conf
+COPY docker/nginx/entrypoint.sh /entrypoint.sh
 COPY --from=build /app/build /usr/share/nginx/html
 
-EXPOSE 80
+RUN chmod +x /entrypoint.sh && mkdir -p /var/www/certbot
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 CMD wget -q -O - http://127.0.0.1/healthz || exit 1
+EXPOSE 80 443
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=5 --start-period=60s \
+    CMD wget -q -O - http://127.0.0.1/healthz || exit 1
+
+ENTRYPOINT ["/entrypoint.sh"]
