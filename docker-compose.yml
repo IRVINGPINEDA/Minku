@@ -28,6 +28,7 @@ services:
         API_BUILD_MAX_HEAP_MB: ${API_BUILD_MAX_HEAP_MB:-384}
     environment:
       SERVER_PORT: 8080
+      JAVA_TOOL_OPTIONS: ${JAVA_TOOL_OPTIONS:--Xms128m -Xmx384m}
       DB_HOST: db
       DB_PORT: 3306
       DB_NAME: ${DB_NAME:-coursite}
@@ -47,6 +48,12 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/api/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
     expose:
       - "8080"
     restart: unless-stopped
@@ -69,7 +76,8 @@ services:
       API_UPSTREAM: http://api:8080
       SERVER_NAME: ${SERVER_NAME:-caleiro.online}
     depends_on:
-      - api
+      api:
+        condition: service_healthy
     ports:
       - "80:80"
     restart: unless-stopped
