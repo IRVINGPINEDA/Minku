@@ -1,0 +1,175 @@
+.btn {
+    display: block;
+    padding: .5rem 2rem;
+    border-radius: 30px;
+    outline: none;
+    border: none;
+    font-size: 17px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .1s ease;
+    text-align: center;
+    margin-bottom: 1rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.btn-light {
+    background-color: $light;
+    color: $dark;
+    margin-bottom: 1rem;
+}
+
+.btn-light:hover {
+    background-color: darken($color: $light, $amount: 4);
+}
+
+.btn-primary {
+    background-color: $primary;
+    color: $white;
+}
+
+.btn-primary:hover {
+    background-color: darken($color: $primary, $amount: 4);
+}
+
+.btn-large {
+    padding: 1rem 0;
+}
+
+.btn-info {
+    background-color: $info;
+    color: $white;
+}
+
+.btn-info:hover {
+    background-color: darken($color: $info, $amount: 4);
+}
+
+.btn-blue {
+    background-color: $blue;
+    color: $white;
+
+    &:hover {
+        background-color: darken($color: $blue, $amount: 4);
+    }
+}
+
+.btn-link {
+    border: $primary 2px solid;
+    box-shadow: none;
+    background-color: $white;
+    color: $primary;
+    &:hover {
+        background-color: $primary;
+        color: $white;
+    }
+}
+
+.btn-link-active {
+    background-color: $primary;
+    color: $white;
+}
+
+.btn-modal {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    color: $white;
+}
+
+.btn-secondary {
+    background-color: $light;
+    color: $primary;
+    box-shadow: none;
+    font-size: 1rem;
+}
+
+.btn-secondary:hover {
+    background-color: darken($color: $light, $amount: 4);
+}
+
+.btn-danger-outline {
+    color: $danger-2;
+    background-color: transparent;
+    border: $danger-2 3px solid;
+    padding: 1rem 2rem;
+    margin: 0;
+    align-self: flex-end;
+}
+
+.btn-danger-outline:hover {
+    background-color: $danger-2;
+    color: $white;
+}
+
+.btn-primary-outline {
+    color: $primary;
+    background-color: transparent;
+    border: $primary 3px solid;
+    padding: 1rem 3rem;
+    margin: 0;
+    align-self: flex-end;
+}
+
+.btn-primary-outline:hover {
+    background-color: $primary;
+    color: $white;
+}
+
+.icon {
+    margin-right: .5rem;
+}
+
+.success {
+    color: $success;
+}
+
+.warning {
+    color: $warning;
+}
+
+.danger {
+    color: $danger;
+}
+
+.btn-success {
+    background-color: $success-1;
+    color: $white;
+}
+
+.btn-success:hover {
+    background-color: darken($color: $success-1, $amount: 4);
+}
+
+.btn-danger {
+    background-color: $danger;
+    color: $white;
+}
+
+.btn-danger:hover {
+    background-color: darken($color: $danger, $amount: 4);
+}
+
+.btn-warning {
+    background-color: $warning;
+    color: $white;
+}
+
+.btn-warning:hover {
+    background-color: darken($color: $warning, $amount: 4);
+}
+
+.btn-upload {
+    background-color: $blue;
+    color: $white;
+    border: $blue 2px solid;
+
+    &:hover {
+        background-color: darken($color: $blue, $amount: 4);
+    }
+}

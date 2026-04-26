@@ -1,0 +1,14 @@
+node_modules
+build
+.git
+.gitignore
+.firebase
+.env
+coursiteAPI
+docker-compose*.yml
+README.md
+CoursiteDesign.pdf
+coursiteBDModel.mdj
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

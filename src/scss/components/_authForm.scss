@@ -1,0 +1,123 @@
+.auth-container {
+    display: flex;
+
+    min-width: 100vw;
+    min-height: 100vh;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    justify-content: space-between;
+    align-self: flex-start;
+    flex-wrap: wrap-reverse;
+}
+.auth-image-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100%;
+    //justify-content: space-around;
+}
+.auth-form-container {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    background-color: $dark-2;
+    justify-content: center;
+    align-items: center;
+}
+.auth-help-container {
+    display: flex;
+    margin-top: 3rem;
+}
+.auth-help, .auth-help-link {
+    margin: 0 1rem;
+    font-size: 16px;
+    color: $light;
+}
+.auth-help-link {
+    color: $blue;
+    text-decoration: underline;
+}
+.auth-image {
+    height: 750px;
+    max-height: 100%;
+    max-width: 100%;
+    align-self: center;
+    margin-bottom: 3rem;
+}
+
+.right {
+    left: calc(100% - 210px - 2rem) !important;
+}
+
+.auth-logo {
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+}
+
+.auth-form-content {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    max-width: 90%;
+}
+.auth-title {
+    font-size: 48px;
+    font-weight: bold;
+    color: $info;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.auth-label {
+    font-size: 16px;
+    font-weight: 300;
+    color: $light;
+    margin-bottom: .3rem;
+}
+.auth-input {
+    padding: .8rem 0;
+    padding-right: 2rem;
+    font-size: 15px;
+    font-weight: 300;
+    color: $light;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+.auth-input:-webkit-autofill {
+    -webkit-text-fill-color: $light;
+    color: $light;
+    box-shadow: 0 0 0px 1000px $dark-2 inset !important;
+}
+
+.auth-input-div {
+    border-radius: 16px;
+    border: 3px solid $primary;
+    background-color: transparent;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.auth-icon {
+    margin: 0 2rem;
+    font-size: 15px;
+    color: $primary;
+}
+.auth-btn {
+    background-color: $blue;
+    padding: 1rem 2rem;
+    border-radius: 16px;
+    color: $white;
+    margin-top: 1rem;
+}
+.auth-btn:hover {
+    background-color: darken($blue, 3%);
+}
+.auth-help-link:hover {
+    color: lighten($blue, 3%);
+}
