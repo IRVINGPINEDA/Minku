@@ -2,7 +2,7 @@ FROM maven:3.9.6-eclipse-temurin-8 AS build
 
 WORKDIR /app
 
-ARG API_BUILD_MAX_HEAP_MB=512
+ARG API_BUILD_MAX_HEAP_MB=384
 # Cap Maven heap so backend and frontend builds do not contend for all host RAM.
 ENV MAVEN_OPTS=-Xmx${API_BUILD_MAX_HEAP_MB}m
 

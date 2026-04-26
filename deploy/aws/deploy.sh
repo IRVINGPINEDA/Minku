@@ -7,6 +7,42 @@ set -euo pipefail
 
 PROJECT_DIR="/opt/coursite"
 REPO_URL="${REPO_URL:-}"   # opcional: URL del repo git para clonar
+SWAP_SIZE_GB="${SWAP_SIZE_GB:-2}"
+SWAP_FILE="${SWAP_FILE:-/swapfile}"
+
+ensure_swap() {
+  local mem_mb swap_mb
+  mem_mb="$(free -m | awk '/^Mem:/ {print $2}')"
+  swap_mb="$(free -m | awk '/^Swap:/ {print $2}')"
+
+  echo "==> Memoria detectada: $(free -h | awk '/^Mem:/ {print $2}') RAM, $(free -h | awk '/^Swap:/ {print $2}') swap"
+
+  if [ "${swap_mb:-0}" -gt 0 ]; then
+    echo "==> Swap ya disponible."
+    return
+  fi
+
+  if [ "${mem_mb:-0}" -ge 3072 ]; then
+    echo "==> RAM suficiente y sin swap. Continuando sin crear swap."
+    return
+  fi
+
+  echo "==> Creando swap de ${SWAP_SIZE_GB}G para evitar fallos por memoria durante los builds..."
+  if [ ! -f "$SWAP_FILE" ]; then
+    sudo fallocate -l "${SWAP_SIZE_GB}G" "$SWAP_FILE" || \
+      sudo dd if=/dev/zero of="$SWAP_FILE" bs=1M count=$((SWAP_SIZE_GB * 1024))
+  fi
+
+  sudo chmod 600 "$SWAP_FILE"
+  sudo mkswap "$SWAP_FILE" >/dev/null
+  sudo swapon "$SWAP_FILE"
+
+  if ! sudo grep -qF "$SWAP_FILE none swap sw 0 0" /etc/fstab; then
+    echo "$SWAP_FILE none swap sw 0 0" | sudo tee -a /etc/fstab >/dev/null
+  fi
+
+  echo "==> Swap activa: $(free -h | awk '/^Swap:/ {print $2}')"
+}
 
 # --------------------------------------------------------------------------
 # 1. Dependencias del sistema
@@ -71,6 +107,8 @@ if [ ! -f ".env" ]; then
   echo "  Luego vuelve a ejecutar: bash deploy.sh"
   exit 0
 fi
+
+ensure_swap
 
 # --------------------------------------------------------------------------
 # 4. Construir y levantar contenedores

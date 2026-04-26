@@ -25,7 +25,7 @@ services:
       context: ./coursiteAPI
       dockerfile: Dockerfile
       args:
-        API_BUILD_MAX_HEAP_MB: ${API_BUILD_MAX_HEAP_MB:-512}
+        API_BUILD_MAX_HEAP_MB: ${API_BUILD_MAX_HEAP_MB:-384}
     environment:
       SERVER_PORT: 8080
       DB_HOST: db
@@ -56,7 +56,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        WEB_BUILD_MAX_OLD_SPACE_SIZE: ${WEB_BUILD_MAX_OLD_SPACE_SIZE:-1536}
+        WEB_BUILD_MAX_OLD_SPACE_SIZE: ${WEB_BUILD_MAX_OLD_SPACE_SIZE:-1024}
         WEB_BUILD_GENERATE_SOURCEMAP: ${WEB_BUILD_GENERATE_SOURCEMAP:-false}
         REACT_APP_API_URL: ${REACT_APP_API_URL:-/api}
         REACT_APP_FIREBASE_API_KEY: ${REACT_APP_FIREBASE_API_KEY:-}
