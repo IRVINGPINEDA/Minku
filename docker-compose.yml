@@ -38,6 +38,7 @@ services:
       SPRING_DATASOURCE_USERNAME: ${DB_USERNAME:-coursite}
       SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-coursite123}
       SPRING_DATASOURCE_DRIVER_CLASS_NAME: com.mysql.cj.jdbc.Driver
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL8Dialect
       JWT_SECRET: ${JWT_SECRET:-change-me}
       JWT_PREFIX: ${JWT_PREFIX:-Bearer}
       JWT_DURATION: ${JWT_DURATION:-86400000}
